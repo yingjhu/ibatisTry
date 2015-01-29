@@ -30,6 +30,10 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 		FROM EMPLOYEE
 	</select>
 
-
+	<update id="updateFirstName" parameterClass="Employee">
+		UPDATE EMPLOYEE
+		SET first_name = #firstName#
+		WHERE id = #id#
+	</update>
 
 </sqlMap>
