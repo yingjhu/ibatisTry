@@ -14,15 +14,15 @@ public class IbatisRead {
 
 		/* This would read all records from the Employee table. */
 		System.out.println("Going to read records.....");
+		@SuppressWarnings("unchecked")
 		List<Employee> ems = (List<Employee>) smc.queryForList(
 				"Employee.getAll", null);
-		Employee em = null;
+
 		for (Employee e : ems) {
 			System.out.print("  " + e.getId());
 			System.out.print("  " + e.getFirstName());
 			System.out.print("  " + e.getLastName());
 			System.out.print("  " + e.getSalary());
-			em = e;
 			System.out.println("");
 		}
 
