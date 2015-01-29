@@ -3,16 +3,33 @@
 PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="Employee"> 
-<insert id="insert" parameterClass="Employee">
-          
-   insert into EMPLOYEE(first_name, last_name, salary)
-   values (#firstName#, #lastName#, #salary#)
+<sqlMap namespace="Employee">
+	<insert id="insert" parameterClass="Employee">
 
-   <selectKey resultClass="int" keyProperty="id">
-      select last_insert_id() as id
-   </selectKey>
+		insert into EMPLOYEE(first_name, last_name, salary)
+		values
+		(#firstName#, #lastName#, #salary#)
 
-</insert> 
+		<selectKey resultClass="int" keyProperty="id">
+			select
+			last_insert_id() as id
+		</selectKey>
+
+	</insert>
+
+	<!-- Using ResultMap -->
+	<resultMap id="result" class="Employee">
+		<result property="id" column="id" />
+		<result property="firstName" column="first_name" />
+		<result property="lastName" column="last_name" />
+		<result property="salary" column="salary" />
+	</resultMap>
+
+	<select id="getAll" resultClass="Employee" resultMap="result">
+		SELECT *
+		FROM EMPLOYEE
+	</select>
+
+
 
 </sqlMap>
