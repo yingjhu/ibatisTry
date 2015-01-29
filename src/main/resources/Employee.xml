@@ -32,8 +32,27 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 
 	<update id="updateFirstName" parameterClass="Employee">
 		UPDATE EMPLOYEE
-		SET first_name = #firstName#
+		SET
+		first_name = #firstName#
 		WHERE id = #id#
 	</update>
+
+
+	<delete id="delete" parameterClass="int">
+		DELETE FROM EMPLOYEE
+		WHERE id
+		= #id#
+	</delete>
+
+	<select id="findByID" resultClass="Employee" resultMap="result">
+		SELECT * FROM EMPLOYEE
+		<dynamic prepend="WHERE ">
+			<isNotNull property="id">
+				id = #id#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+
 
 </sqlMap>
